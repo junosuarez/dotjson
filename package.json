@@ -1,0 +1,30 @@
+{
+  "name": "dotjson",
+  "version": "0.1.0",
+  "description": "get/set api for .json files, like config files",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jden/dotjson"
+  },
+  "keywords": [
+    "json",
+    "config",
+    "file"
+  ],
+  "scripts": {
+    "test": "node test/test"
+  },
+  "author": "jden <jason@denizac.org>",
+  "license": "MIT",
+  "dependencies": {
+    "dot-component": "~0.1.0"
+  },
+  "devDependencies": {
+    "heredoc": "~1.0.0",
+    "tape": "~0.1.5"
+  }
+}
