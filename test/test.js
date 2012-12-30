@@ -21,6 +21,24 @@ test('get', function (t) {
 
 })
 
+test('get multiple', function (t) {
+  t.plan(4)
+
+  var threw = true
+
+  try {
+    var results = dotjson.get(GET_FILE, ['powerLevel', 'robotMorale'])
+    t.equal(results[0], 9001)
+    t.equal(results[1], 'high and steady')
+    t.equal(results.length, 2)
+    threw = false;
+  } finally {
+    t.ok(!threw)
+    t.end()
+  }
+
+})
+
 test('set', function (t) {
   t.plan(1)
   try {
