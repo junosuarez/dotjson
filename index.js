@@ -25,7 +25,7 @@ module.exports.set = function (filename, setter, opts) {
 
   var fd;
   try {
-    fd = fs.openSync(filename, 'wx+')
+    fd = fs.openSync(filename, 'w+')
     readAndUpdate(fd, setter)
   } catch (e) {
     throw e;
