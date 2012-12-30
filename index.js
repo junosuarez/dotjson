@@ -26,7 +26,6 @@ module.exports.set = function (filename, setter, opts) {
       throw new Error('ENOENT')
   } else {
     var file = fs.readFileSync(filename, 'utf8')
-    console.log(file)
     data = JSON.parse(file)
   }
 
