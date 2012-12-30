@@ -73,12 +73,14 @@ test('set with existing file', function (t) {
   try {
   var before = heredoc(function(){/*
 {
-  "thisFile": "already exists"
+  "thisFile": "already exists",
+  "another": "value"
 }
   */})
   var after = heredoc(function(){/*
 {
-  "thisFile": "works just fine"
+  "thisFile": "works just fine",
+  "another": "value"
 }
   */})
 
