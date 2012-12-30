@@ -40,9 +40,10 @@ test('get multiple', function (t) {
 })
 
 test('set', function (t) {
+  const SET_FILE = __dirname + '/set.json'
   t.plan(1)
   try {
-  var expected = heredoc(function(){/*
+    var expected = heredoc(function(){/*
 {
   "powerLevel": 9001,
   "robotMorale": "high and steady",
@@ -50,16 +51,51 @@ test('set', function (t) {
 }
   */})
 
-   dotjson.set('./set.json', require(GET_FILE), {createFile: true})
+    dotjson.set(SET_FILE, require(GET_FILE), {createFile: true})
 
-   var out = fs.readFileSync('./set.json', 'utf8')
+    var out = fs.readFileSync(SET_FILE, 'utf8')
 
-   t.equal(out, expected)
+    t.equal(out, expected)
 
   } finally {
-    if (fs.existsSync('./set.json')) {
-      fs.unlinkSync('./set.json')
+    if (fs.existsSync(SET_FILE)) {
+      fs.unlinkSync(SET_FILE)
     }
+    t.end();
+  }
+
+})
+
+test('set with existing file', function (t) {
+  const EXISTING_FILE = __dirname + '/exists.json'
+  t.plan(2)
+  var threw = true
+  try {
+  var before = heredoc(function(){/*
+{
+  "thisFile": "already exists"
+}
+  */})
+  var after = heredoc(function(){/*
+{
+  "thisFile": "works just fine"
+}
+  */})
+
+    fs.writeFileSync(EXISTING_FILE, before, 'utf-8')
+
+    dotjson.set(EXISTING_FILE, {thisFile: "works just fine"}, {createFile: true})
+
+    var out = fs.readFileSync(EXISTING_FILE, 'utf8')
+
+   t.equal(out, after)
+   threw = false
+
+  } finally {
+    if (fs.existsSync(EXISTING_FILE)) {
+      fs.unlinkSync(EXISTING_FILE)
+    }
+    t.ok(!threw)
     t.end();
   }
 
